@@ -1,17 +1,14 @@
 import React from "react";
 import FetchDataAPI from "../providers/FetchDataAPI";
 import viewportAdjust from "./viewportAdjust";
-import importAllSVG from '../utilities/helpers';
+import importAllSVG from "../utilities/helpers";
 
 const svgList = importAllSVG();
 
 class TasksManager extends React.Component {
   state = {
     tasks: [],
-    taskName: {
-      default: "New Task",
-      input: "",
-    },
+    taskName: "",
     isTaskFormShown: false,
     TaskFormScrollHeight: null,
   };
@@ -20,14 +17,13 @@ class TasksManager extends React.Component {
     super(props);
     this.fetchDataAPI = new FetchDataAPI();
     this.intervalIDList = [];
+    this.defaultTaskName = "New Task";
   }
 
   putNameToState = (evt) => {
-    const { taskName } = this.state;
-    const taskNameCopy = this.createDeepCopy(taskName);
     const { value } = evt.target;
-    taskNameCopy.input = value;
-    this.setState({ taskName: taskNameCopy });
+    const newTaskName = value;
+    this.setState({ taskName: newTaskName });
 
     this.increaseSpaceOfTaskForm(evt);
   };
@@ -46,10 +42,10 @@ class TasksManager extends React.Component {
   async handleTaskSubmit(evt) {
     evt.preventDefault();
     const { taskName } = this.state;
-    const { fetchDataAPI } = this;
+    const { fetchDataAPI, defaultTaskName } = this;
 
     const task = {
-      name: taskName.input.length === 0 ? taskName.default : taskName.input,
+      name: taskName.length === 0 ? defaultTaskName : taskName,
       time: {
         start: 0,
         current: 0,
@@ -117,10 +113,8 @@ class TasksManager extends React.Component {
   }
 
   resetTaskForm() {
-    const { taskName } = this.state;
-    const taskNameCopy = this.createDeepCopy(taskName);
-    taskNameCopy.input = "";
-    this.setState({ isTaskFormShown: false, taskName: taskNameCopy });
+    const newTaskName = "";
+    this.setState({ isTaskFormShown: false, taskName: newTaskName });
   }
 
   scrolltoTheBeginning() {
@@ -135,24 +129,25 @@ class TasksManager extends React.Component {
   }
 
   inputTaskFormValue = (evt) => {
-    const { input } = this.state.taskName;
-    evt.target.value = input;
+    const { taskName } = this.state;
+    evt.target.value = taskName;
   };
 
   defaultTaskFormValue = (evt) => {
+    const { taskName } = this.state;
+    const { defaultTaskName } = this;
+
     if (evt) {
-      const { taskName } = this.state;
-      if (taskName.input.length === 0) {
-        evt.target.value = taskName.default;
+      if (taskName.length === 0) {
+        evt.target.value = defaultTaskName;
       }
       return;
     }
 
-    const { taskName } = this.state;
     const taskFormInput = document.querySelector(".taskForm__input");
 
     if (document.activeElement !== taskFormInput) {
-      return taskName.default;
+      return defaultTaskName;
     }
   };
 
@@ -173,7 +168,8 @@ class TasksManager extends React.Component {
       this.turnOffScrolling();
       return (
         <>
-          <section className="addTask addTask--hidden">{this.BtnAdd()}</section>;
+          <section className="addTask addTask--hidden">{this.BtnAdd()}</section>
+          ;
           <section className="newTask">
             <div className="newTask__container">{this.TaskForm()}</div>
           </section>
@@ -212,7 +208,7 @@ class TasksManager extends React.Component {
 
     const { current, total } = currentTask[0].time;
     const time = current + total;
-    const {seconds, minutes, hours} = this.parseTimeForDisplay(time);
+    const { seconds, minutes, hours } = this.parseTimeForDisplay(time);
 
     let timeDisplay;
 
@@ -245,7 +241,7 @@ class TasksManager extends React.Component {
       item.toString().padStart(2, "0")
     );
 
-    return {seconds, minutes, hours};
+    return { seconds, minutes, hours };
   }
 
   timerStartCount(taskID) {
@@ -563,13 +559,13 @@ class TasksManager extends React.Component {
   }
 
   TaskDoneTemplate(item) {
-      return (
-        <section id={item.id} className="task task--done">
-          {this.BtnTaskRemover()}
-          {this.TaskDoneRemover()}
-          {this.TaskDoneHeader(item)}
-        </section>
-      );
+    return (
+      <section id={item.id} className="task task--done">
+        {this.BtnTaskRemover()}
+        {this.TaskDoneRemover()}
+        {this.TaskDoneHeader(item)}
+      </section>
+    );
   }
 
   render() {
