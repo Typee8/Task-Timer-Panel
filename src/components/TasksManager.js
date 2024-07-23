@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import FetchDataAPI from "../providers/FetchDataAPI";
 import viewportAdjust from "./viewportAdjust";
 import importAllSVG from "../utilities/helpers";
@@ -18,6 +18,7 @@ class TasksManager extends React.Component {
     this.fetchDataAPI = new FetchDataAPI();
     this.intervalIDList = [];
     this.defaultTaskName = "New Task";
+    this.taskFormInputRef = React.createRef();
   }
 
   putNameToState = (evt) => {
@@ -144,9 +145,7 @@ class TasksManager extends React.Component {
       return;
     }
 
-    const taskFormInput = document.querySelector(".taskForm__input");
-
-    if (document.activeElement !== taskFormInput) {
+    if (document.activeElement !== this.taskFormInputRef.current) {
       return defaultTaskName;
     }
   };
@@ -186,6 +185,7 @@ class TasksManager extends React.Component {
       <form className="taskForm" onSubmit={this.handleTaskSubmit.bind(this)}>
         {this.BtnFormRemove()}
         <textarea
+          ref = {this.taskFormInputRef}
           className="taskForm__input"
           name="taskName"
           id="taskName"
