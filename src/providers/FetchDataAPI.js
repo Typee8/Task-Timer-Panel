@@ -71,7 +71,7 @@ class FetchDataAPI {
 
   eachIDtoString(response) {
     const processedResponse = response.map((item) => {
-      if (item.id) {
+      if (item.id && typeof item.id !== 'string') {
         item.id = item.id.toString();
         return item;
       }

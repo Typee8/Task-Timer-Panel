@@ -1,19 +1,8 @@
 import React from "react";
 import FetchDataAPI from "../providers/FetchDataAPI";
 import viewportAdjust from "./viewportAdjust";
+import importAllSVG from '../utilities/helpers';
 
-function importAllSVG() {
-  const r = require.context("../styles/svg-icons", false, /\.svg$/);
-
-  const svgList = {};
-  r.keys().forEach((key) => {
-    r;
-    const svgName = key.replace("./", "").replace(".svg", "");
-
-    svgList[svgName] = r(key).default;
-  });
-  return svgList;
-}
 const svgList = importAllSVG();
 
 class TasksManager extends React.Component {
