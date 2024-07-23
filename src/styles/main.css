@@ -75,6 +75,10 @@ body {
   z-index: 999;
 }
 
+.addTask--hidden {
+  opacity: 0;
+}
+
 .newTask {
   position: fixed;
   z-index: 1002;

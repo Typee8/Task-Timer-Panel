@@ -16,16 +16,6 @@ function viewportAdjust() {
   });
 }
 
-function setOpacityToZero() {
-  const rootWrapper = document.querySelector(".root__wrapper");
-  rootWrapper.style.opacity = 0;
-}
-
-function setOpacityToOne() {
-  const rootWrapper = document.querySelector(".root__wrapper");
-  rootWrapper.style.opacity = 1;
-}
-
 async function setRealVieportHeight() {
   const windowHeight = window.innerHeight;
   const cssRoot = document.documentElement;

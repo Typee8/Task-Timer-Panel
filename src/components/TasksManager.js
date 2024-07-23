@@ -184,6 +184,7 @@ class TasksManager extends React.Component {
       this.turnOffScrolling();
       return (
         <>
+          <section className="addTask addTask--hidden">{this.BtnAdd()}</section>;
           <section className="newTask">
             <div className="newTask__container">{this.TaskForm()}</div>
           </section>
