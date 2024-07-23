@@ -1,5 +1,5 @@
 import React from "react";
-import ServerAPI from "./ServerAPI";
+import FetchDataAPI from "../providers/FetchDataAPI";
 import viewportAdjust from "./viewportAdjust";
 
 function importAllSVG() {
@@ -29,7 +29,7 @@ class TasksManager extends React.Component {
 
   constructor(props) {
     super(props);
-    this.serverAPI = new ServerAPI();
+    this.fetchDataAPI = new FetchDataAPI();
     this.intervalIDList = [];
   }
 
@@ -57,7 +57,7 @@ class TasksManager extends React.Component {
   async handleTaskSubmit(evt) {
     evt.preventDefault();
     const { taskName } = this.state;
-    const { serverAPI } = this;
+    const { fetchDataAPI } = this;
 
     const task = {
       name: taskName.input.length === 0 ? taskName.default : taskName.input,
@@ -71,15 +71,19 @@ class TasksManager extends React.Component {
       isRemoved: false,
     };
 
-    await serverAPI.postData(task);
-    const data = await serverAPI.fetchData();
-    this.setState({ tasks: data });
+    await fetchDataAPI.postData(task);
+    const data = await fetchDataAPI.fetchData();
+    const newTask = data[data.length - 1];
+    const copyTasks = this.createDeepCopy(this.state.tasks);
+    copyTasks.push(newTask);
+    this.setState({ tasks: copyTasks });
+
     this.resetTaskForm();
     this.scrolltoTheBeginning();
   }
 
   async componentDidMount() {
-    const data = await this.serverAPI.fetchData();
+    const data = await this.fetchDataAPI.fetchData();
     this.setState({ tasks: data });
 
     viewportAdjust();
@@ -325,13 +329,13 @@ class TasksManager extends React.Component {
 
   updateTaskData(taskID, currentTask, updatedTasks) {
     this.setState({ tasks: updatedTasks }, () => {
-      this.serverAPI.putData(taskID, currentTask);
+      this.fetchDataAPI.putData(taskID, currentTask);
     });
   }
 
   removeTask(taskID, updatedTasks) {
     this.setState({ tasks: updatedTasks }, () => {
-      this.serverAPI.deleteData(taskID);
+      this.fetchDataAPI.deleteData(taskID);
     });
   }
 
@@ -367,18 +371,14 @@ class TasksManager extends React.Component {
   }
 
   changeObjectValues(obj, values) {
-    console.log(values);
     for (const key in values) {
       if (this.isPlainFilledObject(values[key])) {
-        console.log("YES");
         this.changeObjectValues(obj[key], values[key]);
       } else {
         obj[key] = values[key];
       }
-
-      console.log(obj);
     }
-    console.log(obj);
+
     return obj;
   }
 
@@ -427,7 +427,6 @@ class TasksManager extends React.Component {
   showTaskRemover = (evt) => {
     const taskRemover =
       evt.currentTarget.parentElement.querySelector(".taskRemover");
-    console.log(taskRemover);
     taskRemover.classList.toggle("taskRemover--hidden");
   };
 

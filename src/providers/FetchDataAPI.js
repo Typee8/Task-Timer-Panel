@@ -1,4 +1,4 @@
-class ServerAPI {
+class FetchDataAPI {
   constructor() {
     this.url = "http://192.168.1.103:3005/data";
   }
@@ -42,7 +42,6 @@ class ServerAPI {
       },
       body: JSON.stringify(obj),
     };
-    console.log(options.body);
 
     const response = await fetch(`${this.url}/${id}`, options);
 
@@ -82,4 +81,4 @@ class ServerAPI {
   }
 }
 
-export default ServerAPI;
+export default FetchDataAPI;

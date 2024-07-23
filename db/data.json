@@ -1,3 +1,28 @@
 {
-  "data": []
+  "data": [
+    {
+      "name": "New Task",
+      "time": {
+        "start": 1721732312332,
+        "current": 96,
+        "total": 119
+      },
+      "isRunning": false,
+      "isDone": true,
+      "isRemoved": false,
+      "id": 35
+    },
+    {
+      "name": "Another task",
+      "time": {
+        "start": 0,
+        "current": 0,
+        "total": 0
+      },
+      "isRunning": false,
+      "isDone": false,
+      "isRemoved": false,
+      "id": 36
+    }
+  ]
 }
