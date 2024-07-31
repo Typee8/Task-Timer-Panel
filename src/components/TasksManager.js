@@ -405,6 +405,11 @@ class TasksManager extends React.Component {
 
     const { updatedTasks } = this.getUpdatedTaskData(taskID, {
       isRemoved: true,
+      time: {
+        start: 0,
+        current: 0,
+        total: 0,
+      }
     });
 
     this.removeTask(taskID, updatedTasks);
