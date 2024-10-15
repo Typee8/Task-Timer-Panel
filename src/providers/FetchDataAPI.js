@@ -1,6 +1,7 @@
 class FetchDataAPI {
   constructor() {
-    this.url = "http://192.168.1.103:3005/data";
+    const ip = "";
+    this.url = `http://${ip}/data`;
   }
 
   async postData(obj) {
@@ -71,7 +72,7 @@ class FetchDataAPI {
 
   eachIDtoString(response) {
     const processedResponse = response.map((item) => {
-      if (item.id && typeof item.id !== 'string') {
+      if (item.id && typeof item.id !== "string") {
         item.id = item.id.toString();
         return item;
       }

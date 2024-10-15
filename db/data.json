@@ -1,3 +1,52 @@
 {
-  "data": []
+  "data": [
+    {
+      "name": "Cleaning",
+      "time": {
+        "start": 0,
+        "current": 0,
+        "total": 0
+      },
+      "isRunning": false,
+      "isDone": false,
+      "isRemoved": false,
+      "id": 1
+    },
+    {
+      "name": "Laundry",
+      "time": {
+        "start": 0,
+        "current": 0,
+        "total": 0
+      },
+      "isRunning": false,
+      "isDone": false,
+      "isRemoved": false,
+      "id": 2
+    },
+    {
+      "name": "Cooking",
+      "time": {
+        "start": 0,
+        "current": 0,
+        "total": 0
+      },
+      "isRunning": false,
+      "isDone": false,
+      "isRemoved": false,
+      "id": 3
+    },
+    {
+      "name": "Groceries",
+      "time": {
+        "start": 0,
+        "current": 0,
+        "total": 0
+      },
+      "isRunning": false,
+      "isDone": false,
+      "isRemoved": false,
+      "id": 4
+    }
+  ]
 }
