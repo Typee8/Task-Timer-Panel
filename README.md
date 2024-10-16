@@ -16,7 +16,7 @@ It's the conclusion of **12th chapter** (there's **20**) of [devmentor.pl](https
 5. copy **IPv4 Address** from the console.
 6. open ./src/providers/**FetchDataAPI.js**
 7. paste your ip to ip variable in the constructor (at the top of the code) and save the file.
-8. if you don't have json-server installed on your pc write **'npm install -g json-server'** in the console to install it.
+8. install jsonServer compatible with this project (**Warning! It's GLOBAL install**) **'npm install json-server@0.17 -g'** in the console to install it.
 9. use **_npm run jsonServer_** to enable the app access server's data.
 10. use **_npm run start_** to launch the project.
 

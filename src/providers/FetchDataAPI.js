@@ -1,7 +1,7 @@
 class FetchDataAPI {
   constructor() {
     const ip = "";
-    this.url = `http://${ip}/data`;
+    this.url = `http://${ip}:3005/data`;
   }
 
   async postData(obj) {
