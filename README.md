@@ -8,7 +8,7 @@ It's the conclusion of **12th chapter** (there's **20**) of [devmentor.pl](https
 
 1. fetch the project.
 2. clone it on your pc.
-3. **Make sure you're in the root director!**
+3. **Make sure you're in the root directory!**
 4. use **_npm install_** to install the required packages.
 5. in the console write **'ipconfig'** (on Win) or **networksetup -getinfo Wi-Fi** (on Mac) to search for your ip.
 6. copy **IP adress** of your device from the console.
