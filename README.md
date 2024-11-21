@@ -1,6 +1,6 @@
 ![Task Timer Planner (React)](./README-assets/project-img.png)
 
-# React Components
+# Task Timer Planner (React)
 
 It's the conclusion of **12th chapter** (there's **20**) of [devmentor.pl](https://devmentor.pl/mentoring-javascript) mentoring program.
 
