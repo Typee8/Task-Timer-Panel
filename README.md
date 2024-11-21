@@ -1,4 +1,4 @@
-![React Components](./README-assets/project-img.png)
+![Task Timer Planner (React)](./README-assets/project-img.png)
 
 # React Components
 
