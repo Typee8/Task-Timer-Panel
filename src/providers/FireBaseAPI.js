@@ -5,9 +5,10 @@ class FirebaseFetchDataAPI {
   async fetchData() {
     const db = getDatabase(app);
     const dbRef = ref(db, "/data");
-    const snapshot = await get(dbRef);
     let resultArray = [];
-    if (snapshot.exists()) {
+
+    try {
+      const snapshot = await get(dbRef);
       const result = snapshot.val();
       for (const key in result) {
         const newObj = {
@@ -17,8 +18,9 @@ class FirebaseFetchDataAPI {
 
         resultArray.push(newObj);
       }
-    } else {
-      console.log("Fetch data fails!");
+      console.log("Data fetched successfully!");
+    } catch (error) {
+      throw new Error(`FETCH - failed, status: ${error}`);
     }
 
     return resultArray;
@@ -27,6 +29,7 @@ class FirebaseFetchDataAPI {
   async pushData(obj) {
     const db = getDatabase(app);
     const dbRef = ref(db, "/data");
+
     try {
       await push(dbRef, obj);
       console.log("Data pushed successfully!");
@@ -38,20 +41,23 @@ class FirebaseFetchDataAPI {
   async removeData(id) {
     const db = getDatabase(app);
     const dbRef = ref(db, `/data/${id}`);
-    await remove(dbRef);
+    try {
+      await remove(dbRef);
+    } catch (error) {
+      throw new Error(`REMOVE - failed, status: ${error}`);
+    }
   }
-  /*   async putData(obj) {
+
+  async updateData(id, obj) {
     const db = getDatabase(app);
-    const dbRef = ref(db, "/data");
-    const pushedItemRef = push(dbRef);
+    const dbRef = ref(db, `/data/${id}`);
 
     try {
-      await set(pushedItemRef, obj);
-      console.log("Data putted successfully!");
+      await set(dbRef, obj);
     } catch (error) {
-      throw new Error(`PUT - failed, status: ${error}`);
+      throw new Error(`UPDATE - failed, status: ${error}`);
     }
-  } */
+  }
 }
 
 export default FirebaseFetchDataAPI;

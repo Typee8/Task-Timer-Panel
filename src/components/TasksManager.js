@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import FetchDataAPI from "../providers/FetchDataAPI";
 import FirebaseFetchDataAPI from "../providers/FireBaseAPI";
 import viewportAdjust from "./viewportAdjust";
@@ -318,7 +318,7 @@ class TasksManager extends React.Component {
 
   updateTaskData(taskID, currentTask, updatedTasks) {
     this.setState({ tasks: updatedTasks }, () => {
-      this.fetchDataAPI.putData(taskID, currentTask);
+      this.FirebaseFetchDataAPI.updateData(taskID, currentTask);
     });
   }
 
