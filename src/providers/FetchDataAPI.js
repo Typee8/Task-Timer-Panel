@@ -21,15 +21,13 @@ class FetchDataAPI {
       throw new Error(`POST - failed, status: ${response.status}`);
     }
   }
-
+  // done!
   async fetchData() {
-    console.log("fetchData() launched!");
     const response = await fetch(this.url);
-    console.log(response);
+
     if (response.ok) {
       console.log("FETCH - successful");
       let result = await response.json();
-      console.log(result);
       result = this.eachIDtoString(result);
       return result;
     } else {

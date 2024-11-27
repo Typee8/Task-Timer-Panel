@@ -1,10 +1,46 @@
 import app from "../firebaseConfig";
-import { getDatabase, ref, set, push } from "firebase/database";
+import { getDatabase, ref, set, push, get } from "firebase/database";
 
-class FetchDataAPI {
-  constructor() {
-    this.url = `https://task-timer-panel-default-rtdb.europe-west1.firebasedatabase.app/`;
+class FirebaseFetchDataAPI {
+  async fetchData() {
+    const db = getDatabase(app);
+    const dbRef = ref(db, "/data");
+    const snapshot = await get(dbRef);
+    if (snapshot.exists()) {
+      const result = snapshot.val();
+      let resultArray = [];
+      for (const key in result) {
+        resultArray.push(result[key]);
+      }
+      return resultArray;
+    } else {
+      console.log("Fetch data fails!");
+    }
   }
 
-  async fetchData() {}
+  async pushData(obj) {
+    const db = getDatabase(app);
+    const dbRef = ref(db, "/data");
+    try {
+      await push(dbRef, obj);
+      console.log("Data pushed successfully!");
+    } catch (error) {
+      throw new Error(`PUSH - failed, status: ${error}`);
+    }
+  }
+
+  /*   async putData(obj) {
+    const db = getDatabase(app);
+    const dbRef = ref(db, "/data");
+    const pushedItemRef = push(dbRef);
+
+    try {
+      await set(pushedItemRef, obj);
+      console.log("Data putted successfully!");
+    } catch (error) {
+      throw new Error(`PUT - failed, status: ${error}`);
+    }
+  } */
 }
+
+export default FirebaseFetchDataAPI;

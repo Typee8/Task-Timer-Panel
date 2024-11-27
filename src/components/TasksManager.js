@@ -1,7 +1,9 @@
 import React, { useRef } from "react";
 import FetchDataAPI from "../providers/FetchDataAPI";
+import FirebaseFetchDataAPI from "../providers/FireBaseAPI";
 import viewportAdjust from "./viewportAdjust";
 import importAllSVG from "../utilities/helpers";
+import { v4 as uuidv4 } from "uuid";
 
 const svgList = importAllSVG();
 
@@ -16,6 +18,7 @@ class TasksManager extends React.Component {
   constructor(props) {
     super(props);
     this.fetchDataAPI = new FetchDataAPI();
+    this.FirebaseFetchDataAPI = new FirebaseFetchDataAPI();
     this.intervalIDList = [];
     this.defaultTaskName = "New Task";
     this.taskFormInputRef = React.createRef();
@@ -42,10 +45,11 @@ class TasksManager extends React.Component {
 
   async handleTaskSubmit(evt) {
     evt.preventDefault();
-    const { taskName } = this.state;
+    const { tasks, taskName } = this.state;
     const { fetchDataAPI, defaultTaskName } = this;
 
     const task = {
+      id: uuidv4(),
       name: taskName.length === 0 ? defaultTaskName : taskName,
       time: {
         start: 0,
@@ -57,10 +61,10 @@ class TasksManager extends React.Component {
       isRemoved: false,
     };
 
-    await fetchDataAPI.postData(task);
-    const data = await fetchDataAPI.fetchData();
+    await this.FirebaseFetchDataAPI.pushData(task);
+    const data = await this.FirebaseFetchDataAPI.fetchData();
     const newTask = data[data.length - 1];
-    const copyTasks = this.createDeepCopy(this.state.tasks);
+    const copyTasks = this.createDeepCopy(tasks);
     copyTasks.push(newTask);
     this.setState({ tasks: copyTasks });
 
@@ -69,9 +73,8 @@ class TasksManager extends React.Component {
   }
 
   async componentDidMount() {
-    const data = await this.fetchDataAPI.fetchData();
+    const data = await this.FirebaseFetchDataAPI.fetchData();
     this.setState({ tasks: data });
-
     viewportAdjust();
 
     this.informUserOfRunningTask();
@@ -185,7 +188,7 @@ class TasksManager extends React.Component {
       <form className="taskForm" onSubmit={this.handleTaskSubmit.bind(this)}>
         {this.BtnFormRemove()}
         <textarea
-          ref = {this.taskFormInputRef}
+          ref={this.taskFormInputRef}
           className="taskForm__input"
           name="taskName"
           id="taskName"
@@ -207,6 +210,7 @@ class TasksManager extends React.Component {
     const currentTask = this.state.tasks.filter((item) => item.id === id);
 
     const { current, total } = currentTask[0].time;
+    console.log(typeof current, typeof total);
     const time = current + total;
     const { seconds, minutes, hours } = this.parseTimeForDisplay(time);
 
@@ -246,6 +250,7 @@ class TasksManager extends React.Component {
 
   timerStartCount(taskID) {
     const { currentTask } = this.getUpdatedTaskData(taskID);
+    console.log(`Current Task: ${currentTask}`);
     const { start } = currentTask.time;
 
     const { updatedTasks } = this.getUpdatedTaskData(taskID, {
@@ -347,6 +352,7 @@ class TasksManager extends React.Component {
     let currentTask = null;
 
     copyTasks.forEach((item) => {
+      console.log(typeof taskID, typeof item.id);
       if (item.id === taskID) {
         currentTask = this.changeObjectValues(item, props);
       }
@@ -379,7 +385,6 @@ class TasksManager extends React.Component {
 
   createDeepCopy(item) {
     const deepCopy = JSON.parse(JSON.stringify(item));
-
     return deepCopy;
   }
 
@@ -409,7 +414,7 @@ class TasksManager extends React.Component {
         start: 0,
         current: 0,
         total: 0,
-      }
+      },
     });
 
     this.removeTask(taskID, updatedTasks);
