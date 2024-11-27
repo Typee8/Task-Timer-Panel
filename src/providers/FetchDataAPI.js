@@ -1,7 +1,7 @@
 class FetchDataAPI {
   constructor() {
     const ip = "";
-    this.url = `http://${ip}:3005/data`;
+    this.url = `https://task-timer-panel-default-rtdb.europe-west1.firebasedatabase.app/data"`;
   }
 
   async postData(obj) {
@@ -23,11 +23,13 @@ class FetchDataAPI {
   }
 
   async fetchData() {
+    console.log("fetchData() launched!");
     const response = await fetch(this.url);
-
+    console.log(response);
     if (response.ok) {
       console.log("FETCH - successful");
       let result = await response.json();
+      console.log(result);
       result = this.eachIDtoString(result);
       return result;
     } else {
