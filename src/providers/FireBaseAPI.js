@@ -1,21 +1,27 @@
 import app from "../firebaseConfig";
-import { getDatabase, ref, set, push, get } from "firebase/database";
+import { getDatabase, ref, set, push, get, remove } from "firebase/database";
 
 class FirebaseFetchDataAPI {
   async fetchData() {
     const db = getDatabase(app);
     const dbRef = ref(db, "/data");
     const snapshot = await get(dbRef);
+    let resultArray = [];
     if (snapshot.exists()) {
       const result = snapshot.val();
-      let resultArray = [];
       for (const key in result) {
-        resultArray.push(result[key]);
+        const newObj = {
+          id: key,
+          ...result[key],
+        };
+
+        resultArray.push(newObj);
       }
-      return resultArray;
     } else {
       console.log("Fetch data fails!");
     }
+
+    return resultArray;
   }
 
   async pushData(obj) {
@@ -29,6 +35,11 @@ class FirebaseFetchDataAPI {
     }
   }
 
+  async removeData(id) {
+    const db = getDatabase(app);
+    const dbRef = ref(db, `/data/${id}`);
+    await remove(dbRef);
+  }
   /*   async putData(obj) {
     const db = getDatabase(app);
     const dbRef = ref(db, "/data");

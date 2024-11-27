@@ -3,7 +3,6 @@ import FetchDataAPI from "../providers/FetchDataAPI";
 import FirebaseFetchDataAPI from "../providers/FireBaseAPI";
 import viewportAdjust from "./viewportAdjust";
 import importAllSVG from "../utilities/helpers";
-import { v4 as uuidv4 } from "uuid";
 
 const svgList = importAllSVG();
 
@@ -49,7 +48,6 @@ class TasksManager extends React.Component {
     const { fetchDataAPI, defaultTaskName } = this;
 
     const task = {
-      id: uuidv4(),
       name: taskName.length === 0 ? defaultTaskName : taskName,
       time: {
         start: 0,
@@ -326,7 +324,7 @@ class TasksManager extends React.Component {
 
   removeTask(taskID, updatedTasks) {
     this.setState({ tasks: updatedTasks }, () => {
-      this.fetchDataAPI.deleteData(taskID);
+      this.FirebaseFetchDataAPI.removeData(taskID);
     });
   }
 
