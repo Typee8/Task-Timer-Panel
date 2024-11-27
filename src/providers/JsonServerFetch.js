@@ -1,4 +1,4 @@
-class FetchDataAPI {
+class JsonServerFetch {
   constructor() {
     const ip = "";
     this.url = `https://task-timer-panel-default-rtdb.europe-west1.firebasedatabase.app/data"`;
@@ -82,4 +82,4 @@ class FetchDataAPI {
   }
 }
 
-export default FetchDataAPI;
+export default JsonServerFetch;

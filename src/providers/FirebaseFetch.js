@@ -1,7 +1,7 @@
 import app from "../firebaseConfig";
 import { getDatabase, ref, set, push, get, remove } from "firebase/database";
 
-class FirebaseFetchDataAPI {
+class FirebaseFetch {
   async fetchData() {
     const db = getDatabase(app);
     const dbRef = ref(db, "/data");
@@ -60,4 +60,4 @@ class FirebaseFetchDataAPI {
   }
 }
 
-export default FirebaseFetchDataAPI;
+export default FirebaseFetch;

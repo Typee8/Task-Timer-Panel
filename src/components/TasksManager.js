@@ -1,6 +1,5 @@
 import React from "react";
-import FetchDataAPI from "../providers/FetchDataAPI";
-import FirebaseFetchDataAPI from "../providers/FireBaseAPI";
+import FirebaseFetch from "../providers/FirebaseFetch";
 import viewportAdjust from "./viewportAdjust";
 import importAllSVG from "../utilities/helpers";
 
@@ -16,8 +15,7 @@ class TasksManager extends React.Component {
 
   constructor(props) {
     super(props);
-    this.fetchDataAPI = new FetchDataAPI();
-    this.FirebaseFetchDataAPI = new FirebaseFetchDataAPI();
+    this.firebaseFetch = new FirebaseFetch();
     this.intervalIDList = [];
     this.defaultTaskName = "New Task";
     this.taskFormInputRef = React.createRef();
@@ -45,7 +43,7 @@ class TasksManager extends React.Component {
   async handleTaskSubmit(evt) {
     evt.preventDefault();
     const { tasks, taskName } = this.state;
-    const { fetchDataAPI, defaultTaskName } = this;
+    const { firebaseFetch, defaultTaskName } = this;
 
     const task = {
       name: taskName.length === 0 ? defaultTaskName : taskName,
@@ -59,8 +57,8 @@ class TasksManager extends React.Component {
       isRemoved: false,
     };
 
-    await this.FirebaseFetchDataAPI.pushData(task);
-    const data = await this.FirebaseFetchDataAPI.fetchData();
+    await firebaseFetch.pushData(task);
+    const data = await firebaseFetch.fetchData();
     const newTask = data[data.length - 1];
     const copyTasks = this.createDeepCopy(tasks);
     copyTasks.push(newTask);
@@ -71,7 +69,7 @@ class TasksManager extends React.Component {
   }
 
   async componentDidMount() {
-    const data = await this.FirebaseFetchDataAPI.fetchData();
+    const data = await this.firebaseFetch.fetchData();
     this.setState({ tasks: data });
     viewportAdjust();
 
@@ -206,9 +204,7 @@ class TasksManager extends React.Component {
 
   showTime(id) {
     const currentTask = this.state.tasks.filter((item) => item.id === id);
-
     const { current, total } = currentTask[0].time;
-    console.log(typeof current, typeof total);
     const time = current + total;
     const { seconds, minutes, hours } = this.parseTimeForDisplay(time);
 
@@ -248,7 +244,6 @@ class TasksManager extends React.Component {
 
   timerStartCount(taskID) {
     const { currentTask } = this.getUpdatedTaskData(taskID);
-    console.log(`Current Task: ${currentTask}`);
     const { start } = currentTask.time;
 
     const { updatedTasks } = this.getUpdatedTaskData(taskID, {
@@ -318,13 +313,13 @@ class TasksManager extends React.Component {
 
   updateTaskData(taskID, currentTask, updatedTasks) {
     this.setState({ tasks: updatedTasks }, () => {
-      this.FirebaseFetchDataAPI.updateData(taskID, currentTask);
+      this.firebaseFetch.updateData(taskID, currentTask);
     });
   }
 
   removeTask(taskID, updatedTasks) {
     this.setState({ tasks: updatedTasks }, () => {
-      this.FirebaseFetchDataAPI.removeData(taskID);
+      this.firebaseFetch.removeData(taskID);
     });
   }
 
@@ -350,7 +345,6 @@ class TasksManager extends React.Component {
     let currentTask = null;
 
     copyTasks.forEach((item) => {
-      console.log(typeof taskID, typeof item.id);
       if (item.id === taskID) {
         currentTask = this.changeObjectValues(item, props);
       }
