@@ -4,5 +4,5 @@
 
 It's the conclusion of **12th chapter** (there's **20**) of [devmentor.pl](https://devmentor.pl/mentoring-javascript) mentoring program.
 
-##Check it out:
+## Check it out:
 https://typee8.github.io/Task-Timer-Panel-Production/
