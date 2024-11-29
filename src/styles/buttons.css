@@ -37,8 +37,8 @@
 
 .btn--pause,
 .btn--submit,
-.btn--end,
-.btn--remove {
+.task__btn--save,
+.task__btn--remove {
   width: calc(var(--btn-width-default) * 2.8);
   height: calc(var(--btn-height-default) * 1.6);
   border-radius: 20px;
@@ -64,7 +64,7 @@
   height: calc(var(--btn-height-default) * 0.6);
 }
 
-.task__btn--remove,
+.task__btn--taskRemover,
 .btn--formRemove {
   position: absolute;
   top: 15px;
@@ -73,7 +73,7 @@
   height: calc(var(--btn-height-default) * 0.8);
 }
 
-.task__btn--remove {
+.task__btn--taskRemover {
   z-index: 1001;
 }
 

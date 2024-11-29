@@ -31,7 +31,7 @@
 }
 
 .task__title,
-.taskRemover__header,
+.remover__title,
 .btn--submit {
   font-size: 24px;
 }
@@ -51,7 +51,7 @@
   }
 
   .task__title,
-  .taskRemover__header,
+  .remover__title,
   .btn--submit {
     font-size: 22px;
   }
@@ -63,7 +63,7 @@
   }
 
   .task__title,
-  .taskRemover__header,
+  .remover__title,
   .btn--submit {
     font-size: 20px;
   }

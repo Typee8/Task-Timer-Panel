@@ -138,12 +138,12 @@ body {
 }
 
 .task__title,
-.taskRemover__header {
+.remover__title {
   width: 85%;
   word-wrap: break-word;
 }
 
-.taskRemover {
+.task__remover {
   z-index: 1000;
   position: absolute;
   top: 0;
@@ -160,13 +160,13 @@ body {
   transition: opacity 0.2s ease;
 }
 
-.taskRemover--hidden {
+.task__remover--hidden {
   opacity: 0;
   visibility: hidden;
   background-color: rgb(140, 140, 140);
 }
 
-.taskRemover__container {
+.remover__container {
   display: flex;
   justify-content: center;
   gap: 40px;

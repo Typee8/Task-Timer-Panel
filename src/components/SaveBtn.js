@@ -1,7 +1,9 @@
-export default function SaveBtn() {
+import bookmarkIcon from "../images/bookmark_icon.svg";
+
+export default function SaveBtn({ className, onClick }) {
   return (
-    <button className onClick>
-      <img className src />
+    <button className={className} onClick={onClick}>
+      <img className="btn__sign" src={bookmarkIcon} alt="bookmark sign" />
     </button>
   );
 }

@@ -1,9 +1,9 @@
-import crossIcon from "../images/cross_icon.svg";
+import binIcon from "../images/bin_icon.svg";
 
-export default function RemoveBtn({ className, onClick, isDisabled }) {
+export default function RemoveBtn({ className, onClick, isDisabled = false }) {
   return (
     <button className={className} onClick={onClick} disabled={isDisabled}>
-      <img className="btn__sign" src={crossIcon} alt="cross sign" />
+      <img className="btn__sign" src={binIcon} alt="cross sign" />
     </button>
   );
 }
