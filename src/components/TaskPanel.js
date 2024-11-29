@@ -37,8 +37,8 @@ export default function TaskPanel() {
   ));
 
   return (
-    <section className="TaskPanel">
-      <section className="ActiveTasks">{activeTasksJSX}</section>
+    <section className="taskPanel">
+      <section className="activeTasks">{activeTasksJSX}</section>
     </section>
   );
 }

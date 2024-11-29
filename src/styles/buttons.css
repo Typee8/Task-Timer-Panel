@@ -1,0 +1,92 @@
+:root {
+  --btn-width-default: 50px;
+  --btn-height-default: 50px;
+}
+
+.task__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--btn-width-default);
+  height: var(--btn-height-default);
+  border: none;
+  border-radius: 50%;
+  background-color: whitesmoke;
+  transition: all 0.2s ease;
+}
+
+.btn--start,
+.btn--add {
+  width: calc(var(--btn-width-default) * 1.8);
+  height: calc(var(--btn-height-default) * 1.8);
+}
+
+.btn--start,
+.btn--pause {
+  grid-column: 2/3;
+}
+
+.btn--add {
+  align-self: center;
+  margin-block: auto;
+}
+
+.btn--add-active {
+  display: none;
+}
+
+.btn--pause,
+.btn--submit,
+.btn--end,
+.btn--remove {
+  width: calc(var(--btn-width-default) * 2.8);
+  height: calc(var(--btn-height-default) * 1.6);
+  border-radius: 20px;
+}
+
+.btn--submit {
+  position: absolute;
+  bottom: 40px;
+}
+
+.btn__sign {
+  width: var(--btn-width-default);
+  height: var(--btn-height-default);
+}
+
+.btn__sign--small {
+  width: calc(var(--btn-width-default) * 0.5);
+  height: calc(var(--btn-height-default) * 0.5);
+}
+
+.btn__sign--medium {
+  width: calc(var(--btn-width-default) * 0.6);
+  height: calc(var(--btn-height-default) * 0.6);
+}
+
+.task__btn--remove,
+.btn--formRemove {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: calc(var(--btn-width-default) * 0.8);
+  height: calc(var(--btn-height-default) * 0.8);
+}
+
+.task__btn--remove {
+  z-index: 1001;
+}
+
+@media (min-width: 760px) {
+  :root {
+    --btn-width-default: 40px;
+    --btn-height-default: 40px;
+  }
+}
+
+@media (min-width: 1400px) {
+  :root {
+    --btn-width-default: 35px;
+    --btn-height-default: 35px;
+  }
+}

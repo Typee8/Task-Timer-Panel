@@ -1,0 +1,70 @@
+@font-face {
+  font-family: Roboto;
+  src: url(./fonts/Roboto/Roboto-Regular.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Roboto;
+  src: url(./fonts/Roboto/Roboto-Medium.ttf);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: Roboto;
+  src: url(./fonts/Roboto/Roboto-Bold.ttf);
+  font-weight: 700;
+}
+
+* {
+  font-family: Roboto;
+}
+
+.task__timer {
+  font-size: 80px;
+}
+
+.taskForm__input,
+.tasksDone__header {
+  font-size: 32px;
+  color: white;
+}
+
+.task__title,
+.taskRemover__header,
+.btn--submit {
+  font-size: 24px;
+}
+
+.btn--submit {
+  font-weight: 500;
+}
+
+@media (min-width: 760px) {
+  .task__timer {
+    font-size: 64px;
+  }
+
+  .taskForm__input,
+  .tasksDone__header {
+    font-size: 24px;
+  }
+
+  .task__title,
+  .taskRemover__header,
+  .btn--submit {
+    font-size: 22px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .task__timer {
+    font-size: 56px;
+  }
+
+  .task__title,
+  .taskRemover__header,
+  .btn--submit {
+    font-size: 20px;
+  }
+}

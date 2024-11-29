@@ -1,0 +1,39 @@
+@media (min-width: 760px) {
+  .activeTasks,
+  .tasksDone {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 350px);
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .task,
+  .addTask {
+    --numberOfTasksPerWindow: 3;
+    height: var(--taskHeight);
+  }
+
+  .tasksDone__header {
+    grid-column: 1 / -1;
+    text-align: start;
+  }
+
+  .newTask {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .newTask__container {
+    position: absolute;
+    top: 15vh;
+    margin: unset;
+    transform: unset;
+    width: 350px;
+    height: 400px;
+  }
+
+  .taskForm__input {
+    margin-bottom: 0;
+  }
+}
