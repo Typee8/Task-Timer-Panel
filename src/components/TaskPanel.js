@@ -33,7 +33,7 @@ export default function TaskPanel() {
 
   const activeTasks = tasks.filter((task) => !task.isDone && !task.isRemoved);
   const activeTasksJSX = activeTasks.map((task) => (
-    <Task id={task.id} title={task.title} />
+    <Task id={task.id} title={task.title} time={task.time} />
   ));
 
   return (
