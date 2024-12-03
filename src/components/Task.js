@@ -1,18 +1,17 @@
 import TaskRemoverBtn from "./TaskRemoverBtn";
 import TaskRemover from "./TaskRemover";
 import StartBtn from "./StartBtn";
+import PauseBtn from "./PauseBtn";
 import { useState } from "react";
 
 export default function Task({ id, title, time }) {
   const [isTaskRemoverOpen, setIsTaskRemoverOpen] = useState(false);
-  const [isRunning, setIsRunning] = useState(false);
   const [intervalID, setIntervalId] = useState();
   const [savedTimes, setSavedTimes] = useState(time);
+  const [isRunning, setIsRunning] = useState(false);
 
   function showTime(time) {
-    const { current, total } = time;
-    const currentTime = current + total;
-    const { seconds, minutes, hours } = convertTimeFromSeconds(currentTime);
+    const { seconds, minutes, hours } = convertTimeFromSeconds(time.current);
 
     let timeDisplay;
     hours > 0
@@ -48,13 +47,20 @@ export default function Task({ id, title, time }) {
   function handleTaskStart() {
     const { current } = savedTimes;
     const startTime = Date.now();
-    const intervalID = setInterval(() => {
+    const newIntervalID = setInterval(() => {
       setSavedTimes({
         ...savedTimes,
-        total: current + parseInt((Date.now() - startTime) / 1000),
+        current: current + parseInt((Date.now() - startTime) / 1000),
       });
     }, 1000);
-    setIntervalId(intervalID);
+    clearInterval(intervalID);
+    setIntervalId(newIntervalID);
+    setIsRunning(true);
+  }
+
+  function handleTaskPause(evt) {
+    clearInterval(intervalID);
+    setIsRunning(false);
   }
 
   return (
@@ -68,18 +74,23 @@ export default function Task({ id, title, time }) {
         }
         isDisabled={false}
       />
-      {/* Tutaj skończyłem! Muszę dodać task__footer */}
       <TaskRemover isOpen={isTaskRemoverOpen} />
       <header className="task__header">
         <div className="task__title">{title}</div>
         <div className="task__timer">{showTime(savedTimes)}</div>
       </header>
       <footer className="task__footer">
-        <StartBtn
-          className="task__btn task__btn--start"
-          onClick={handleTaskStart}
-        />
-        PauseBtn
+        {isRunning ? (
+          <PauseBtn
+            className="task__btn task__btn--pause"
+            onClick={handleTaskPause}
+          />
+        ) : (
+          <StartBtn
+            className="task__btn task__btn--start"
+            onClick={handleTaskStart}
+          />
+        )}
       </footer>
     </section>
   );

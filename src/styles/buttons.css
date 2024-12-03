@@ -22,7 +22,7 @@
 }
 
 .task__btn--start,
-.btn--pause {
+.task__btn--pause {
   grid-column: 2/3;
 }
 
@@ -35,7 +35,7 @@
   display: none;
 }
 
-.btn--pause,
+.task__btn--pause,
 .btn--submit,
 .task__btn--save,
 .task__btn--remove {
