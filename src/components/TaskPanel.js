@@ -1,38 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Task from "./Task";
+import FirebaseFetch from "../Providers/FirebaseFetch";
 
 export default function TaskPanel() {
-  const tasksObjPH = [
-    {
-      id: "1",
-      isDone: false,
-      title: "Cleaning",
-      time: {
-        current: 0,
-        total: 0,
-      },
+  const firebaseFetch = new FirebaseFetch();
+  const [tasksList, setTasksList] = useState(false);
+
+  useEffect(
+    () => async () => {
+      const data = await firebaseFetch.fetchData();
+      setTasksList(data);
     },
-    {
-      id: "2",
-      isDone: false,
-      title: "Cooking",
-      time: {
-        current: 0,
-        total: 0,
-      },
-    },
-  ];
-
-  const [tasks, setTasks] = useState(tasksObjPH);
-
-  const activeTasks = tasks.filter((task) => !task.isDone);
-  const activeTasksJSX = activeTasks.map((task) => (
-    <Task id={task.id} title={task.title} time={task.time} />
-  ));
-
-  return (
-    <section className="taskPanel">
-      <section className="activeTasks">{activeTasksJSX}</section>
-    </section>
+    []
   );
+
+  if (tasksList === false) {
+    return (
+      <section className="taskPanel">
+        <h2>LOADING</h2>
+      </section>
+    );
+  } else {
+    const activeTasks = tasksList.filter((task) => !task.isDone);
+    const activeTasksJSX = activeTasks.map((task) => (
+      <Task id={task.id} title={task.title} time={task.time} />
+    ));
+
+    return (
+      <section className="taskPanel">
+        <section className="activeTasks">{activeTasksJSX}</section>
+      </section>
+    );
+  }
 }

@@ -1,0 +1,20 @@
+{
+  "tasksList": {
+    "1": {
+      "isDone": false,
+      "title": "Cleaning",
+      "time": {
+        "current": 0,
+        "total": 0
+      }
+    },
+    "2": {
+      "isDone": false,
+      "title": "Cooking",
+      "time": {
+        "current": 0,
+        "total": 0
+      }
+    }
+  }
+}
