@@ -9,7 +9,6 @@ export default function TaskPanel() {
       title: "Cleaning",
       time: {
         current: 0,
-        start: 0,
         total: 0,
       },
     },
@@ -19,7 +18,6 @@ export default function TaskPanel() {
       title: "Cooking",
       time: {
         current: 0,
-        start: 0,
         total: 0,
       },
     },

@@ -46,11 +46,14 @@ export default function Task({ id, title, time }) {
   }
 
   function handleTaskStart() {
+    const { current } = savedTimes;
     const startTime = Date.now();
-    const intervalID = setInterval(
-      setSavedTimes(parseInt(Date.now() - startTime / 1000)),
-      1000
-    );
+    const intervalID = setInterval(() => {
+      setSavedTimes({
+        ...savedTimes,
+        total: current + parseInt((Date.now() - startTime) / 1000),
+      });
+    }, 1000);
     setIntervalId(intervalID);
   }
 
