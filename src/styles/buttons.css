@@ -15,13 +15,13 @@
   transition: all 0.2s ease;
 }
 
-.btn--start,
+.task__btn--start,
 .btn--add {
   width: calc(var(--btn-width-default) * 1.8);
   height: calc(var(--btn-height-default) * 1.8);
 }
 
-.btn--start,
+.task__btn--start,
 .btn--pause {
   grid-column: 2/3;
 }

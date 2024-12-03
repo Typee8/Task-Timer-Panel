@@ -6,8 +6,6 @@ export default function TaskPanel() {
     {
       id: "1",
       isDone: false,
-      isRemoved: false,
-      isRunning: false,
       title: "Cleaning",
       time: {
         current: 0,
@@ -18,8 +16,6 @@ export default function TaskPanel() {
     {
       id: "2",
       isDone: false,
-      isRemoved: false,
-      isRunning: false,
       title: "Cooking",
       time: {
         current: 0,
@@ -31,7 +27,7 @@ export default function TaskPanel() {
 
   const [tasks, setTasks] = useState(tasksObjPH);
 
-  const activeTasks = tasks.filter((task) => !task.isDone && !task.isRemoved);
+  const activeTasks = tasks.filter((task) => !task.isDone);
   const activeTasksJSX = activeTasks.map((task) => (
     <Task id={task.id} title={task.title} time={task.time} />
   ));

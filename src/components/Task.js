@@ -1,9 +1,13 @@
 import TaskRemoverBtn from "./TaskRemoverBtn";
 import TaskRemover from "./TaskRemover";
+import StartBtn from "./StartBtn";
 import { useState } from "react";
 
 export default function Task({ id, title, time }) {
   const [isTaskRemoverOpen, setIsTaskRemoverOpen] = useState(false);
+  const [isRunning, setIsRunning] = useState(false);
+  const [intervalID, setIntervalId] = useState();
+  const [savedTimes, setSavedTimes] = useState(time);
 
   function showTime(time) {
     const { current, total } = time;
@@ -41,6 +45,15 @@ export default function Task({ id, title, time }) {
     return { seconds, minutes, hours };
   }
 
+  function handleTaskStart() {
+    const startTime = Date.now();
+    const intervalID = setInterval(
+      setSavedTimes(parseInt(Date.now() - startTime / 1000)),
+      1000
+    );
+    setIntervalId(intervalID);
+  }
+
   return (
     <section id={id} className="task">
       <TaskRemoverBtn
@@ -56,9 +69,15 @@ export default function Task({ id, title, time }) {
       <TaskRemover isOpen={isTaskRemoverOpen} />
       <header className="task__header">
         <div className="task__title">{title}</div>
-        <div className="task__timer">{showTime(time)}</div>
+        <div className="task__timer">{showTime(savedTimes)}</div>
       </header>
-      <footer className="task__footer">Btn Start/Pause</footer>
+      <footer className="task__footer">
+        <StartBtn
+          className="task__btn task__btn--start"
+          onClick={handleTaskStart}
+        />
+        PauseBtn
+      </footer>
     </section>
   );
 }
