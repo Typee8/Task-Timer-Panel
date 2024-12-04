@@ -5,7 +5,7 @@ import PauseBtn from "./PauseBtn";
 import FirebaseFetch from "../Providers/FirebaseFetch";
 import { useState } from "react";
 
-export default function Task({ id, title, time, taskData }) {
+export default function Task({ id, title, time, taskData, updateTaskPanel }) {
   const [isTaskRemoverOpen, setIsTaskRemoverOpen] = useState(false);
   const [intervalID, setIntervalId] = useState();
   const [savedTimes, setSavedTimes] = useState(time);
@@ -72,6 +72,19 @@ export default function Task({ id, title, time, taskData }) {
     firebaseFetch.updateData(id, newTaskData);
   }
 
+  function handleTaskSave() {
+    clearInterval(intervalID);
+    setIsRunning(false);
+    const newTaskData = {
+      ...taskData,
+      isDone: true,
+      time: savedTimes,
+    };
+    firebaseFetch.updateData(id, newTaskData);
+    updateTaskPanel(id, newTaskData);
+    setIsTaskRemoverOpen(false);
+  }
+
   return (
     <section id={id} className="task">
       <TaskRemoverBtn
@@ -83,7 +96,7 @@ export default function Task({ id, title, time, taskData }) {
         }
         isDisabled={false}
       />
-      <TaskRemover isOpen={isTaskRemoverOpen} />
+      <TaskRemover isOpen={isTaskRemoverOpen} handleTaskSave={handleTaskSave} />
       <header className="task__header">
         <div className="task__title">{title}</div>
         <div className="task__timer">{showTime(savedTimes)}</div>

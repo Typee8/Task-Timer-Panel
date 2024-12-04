@@ -3,8 +3,8 @@ import Task from "./Task";
 import FirebaseFetch from "../Providers/FirebaseFetch";
 
 export default function TaskPanel() {
-  const firebaseFetch = new FirebaseFetch();
   const [tasksList, setTasksList] = useState(false);
+  const firebaseFetch = new FirebaseFetch();
 
   useEffect(
     () => async () => {
@@ -13,6 +13,11 @@ export default function TaskPanel() {
     },
     []
   );
+
+  function updateTaskPanel(id, obj) {
+    const newTasksList = tasksList.map((task) => (id === task.id ? obj : task));
+    setTasksList(newTasksList);
+  }
 
   if (tasksList === false) {
     return (
@@ -23,7 +28,13 @@ export default function TaskPanel() {
   } else {
     const activeTasks = tasksList.filter((task) => !task.isDone);
     const activeTasksJSX = activeTasks.map((task) => (
-      <Task id={task.id} title={task.title} time={task.time} taskData={task} />
+      <Task
+        id={task.id}
+        title={task.title}
+        time={task.time}
+        taskData={task}
+        updateTaskPanel={updateTaskPanel}
+      />
     ));
 
     return (
