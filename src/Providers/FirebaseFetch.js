@@ -2,9 +2,13 @@ import app from "./firebaseConfig";
 import { getDatabase, ref, set, push, get, remove } from "firebase/database";
 
 class FirebaseFetch {
+  constructor() {
+    this.dataLocation = "/tasksList";
+  }
+
   async fetchData() {
     const db = getDatabase(app);
-    const dbRef = ref(db, "/tasksList");
+    const dbRef = ref(db, this.dataLocation);
     let resultArray = [];
 
     try {
@@ -43,6 +47,7 @@ class FirebaseFetch {
     const dbRef = ref(db, `/data/${id}`);
     try {
       await remove(dbRef);
+      console.log("Data removed successfully!");
     } catch (error) {
       throw new Error(`REMOVE - failed, status: ${error}`);
     }
@@ -50,10 +55,11 @@ class FirebaseFetch {
 
   async updateData(id, obj) {
     const db = getDatabase(app);
-    const dbRef = ref(db, `/data/${id}`);
+    const dbRef = ref(db, `${this.dataLocation}/${id}`);
 
     try {
       await set(dbRef, obj);
+      console.log("Data updated successfully!");
     } catch (error) {
       throw new Error(`UPDATE - failed, status: ${error}`);
     }

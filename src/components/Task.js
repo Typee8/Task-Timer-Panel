@@ -2,13 +2,16 @@ import TaskRemoverBtn from "./TaskRemoverBtn";
 import TaskRemover from "./TaskRemover";
 import StartBtn from "./StartBtn";
 import PauseBtn from "./PauseBtn";
+import FirebaseFetch from "../Providers/FirebaseFetch";
 import { useState } from "react";
 
-export default function Task({ id, title, time }) {
+export default function Task({ id, title, time, taskData }) {
   const [isTaskRemoverOpen, setIsTaskRemoverOpen] = useState(false);
   const [intervalID, setIntervalId] = useState();
   const [savedTimes, setSavedTimes] = useState(time);
   const [isRunning, setIsRunning] = useState(false);
+
+  const firebaseFetch = new FirebaseFetch();
 
   function showTime(time) {
     const { seconds, minutes, hours } = convertTimeFromSeconds(time.current);
@@ -58,9 +61,15 @@ export default function Task({ id, title, time }) {
     setIsRunning(true);
   }
 
-  function handleTaskPause(evt) {
+  function handleTaskPause() {
     clearInterval(intervalID);
     setIsRunning(false);
+    const newTaskData = {
+      ...taskData,
+      time: savedTimes,
+    };
+
+    firebaseFetch.updateData(id, newTaskData);
   }
 
   return (
