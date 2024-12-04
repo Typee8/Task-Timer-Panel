@@ -1,7 +1,11 @@
 import RemoveBtn from "./RemoveBtn";
 import SaveBtn from "./SaveBtn";
 
-export default function TaskRemover({ isOpen, handleTaskSave }) {
+export default function TaskRemover({
+  isOpen,
+  handleTaskSave,
+  handleTaskRemove,
+}) {
   if (isOpen) {
     return (
       <section className="task__remover">
@@ -15,7 +19,7 @@ export default function TaskRemover({ isOpen, handleTaskSave }) {
           />
           <RemoveBtn
             className="task__btn task__btn--remove"
-            onClick={() => console.log("RemoveBtn click")}
+            onClick={handleTaskRemove}
           />
         </div>
       </section>

@@ -22,7 +22,7 @@ body {
 }
 
 .activeTasks,
-.tasksDone {
+.finishedTasks {
   --tasks-gap: 20px;
   --tasks-padding: 20px;
 
@@ -63,7 +63,7 @@ body {
   }
 }
 
-.tasksDone__header {
+.finishedTasks__header {
   width: 100%;
   padding: 20px;
   padding-left: 40px;

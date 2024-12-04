@@ -25,7 +25,7 @@
 }
 
 .taskForm__input,
-.tasksDone__header {
+.finishedTasks__header {
   font-size: 32px;
   color: white;
 }
@@ -46,7 +46,7 @@
   }
 
   .taskForm__input,
-  .tasksDone__header {
+  .finishedTasks__header {
     font-size: 24px;
   }
 

@@ -1,6 +1,6 @@
 @media (min-width: 760px) {
   .activeTasks,
-  .tasksDone {
+  .finishedTasks {
     display: grid;
     grid-template-columns: repeat(auto-fill, 350px);
     gap: 20px;
@@ -13,7 +13,7 @@
     height: var(--taskHeight);
   }
 
-  .tasksDone__header {
+  .finishedTasks__header {
     grid-column: 1 / -1;
     text-align: start;
   }

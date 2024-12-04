@@ -32,7 +32,7 @@ class FirebaseFetch {
 
   async pushData(obj) {
     const db = getDatabase(app);
-    const dbRef = ref(db, "/data");
+    const dbRef = ref(db, this.dataLocation);
 
     try {
       await push(dbRef, obj);
@@ -44,7 +44,7 @@ class FirebaseFetch {
 
   async removeData(id) {
     const db = getDatabase(app);
-    const dbRef = ref(db, `/data/${id}`);
+    const dbRef = ref(db, `${this.dataLocation}/${id}`);
     try {
       await remove(dbRef);
       console.log("Data removed successfully!");

@@ -81,7 +81,15 @@ export default function Task({ id, title, time, taskData, updateTaskPanel }) {
       time: savedTimes,
     };
     firebaseFetch.updateData(id, newTaskData);
-    updateTaskPanel(id, newTaskData);
+    // if firebaseFetch fails i need to stop updating Task Panel.
+    updateTaskPanel();
+    setIsTaskRemoverOpen(false);
+  }
+
+  function handleTaskRemove() {
+    clearInterval(intervalID);
+    firebaseFetch.removeData(id);
+    updateTaskPanel();
     setIsTaskRemoverOpen(false);
   }
 
@@ -96,7 +104,11 @@ export default function Task({ id, title, time, taskData, updateTaskPanel }) {
         }
         isDisabled={false}
       />
-      <TaskRemover isOpen={isTaskRemoverOpen} handleTaskSave={handleTaskSave} />
+      <TaskRemover
+        isOpen={isTaskRemoverOpen}
+        handleTaskSave={handleTaskSave}
+        handleTaskRemove={handleTaskRemove}
+      />
       <header className="task__header">
         <div className="task__title">{title}</div>
         <div className="task__timer">{showTime(savedTimes)}</div>
