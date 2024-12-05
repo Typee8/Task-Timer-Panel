@@ -10,7 +10,7 @@
     height: var(--taskHeight);
   }
 
-  .newTask__container {
+  .taskForm {
     width: 300px;
     height: 350px;
   }

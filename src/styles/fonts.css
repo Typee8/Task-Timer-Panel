@@ -32,11 +32,11 @@
 
 .task__title,
 .remover__title,
-.btn--submit {
+.task__btn--submit {
   font-size: 24px;
 }
 
-.btn--submit {
+.task__btn--submit {
   font-weight: 500;
 }
 
@@ -52,7 +52,7 @@
 
   .task__title,
   .remover__title,
-  .btn--submit {
+  .task__btn--submit {
     font-size: 22px;
   }
 }
@@ -64,7 +64,7 @@
 
   .task__title,
   .remover__title,
-  .btn--submit {
+  .task__btn--submit {
     font-size: 20px;
   }
 }

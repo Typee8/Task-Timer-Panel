@@ -18,7 +18,7 @@
     text-align: start;
   }
 
-  .newTask__container {
+  .taskForm {
     position: absolute;
     top: 15vh;
     margin: unset;

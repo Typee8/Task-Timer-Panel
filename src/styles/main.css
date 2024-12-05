@@ -35,7 +35,7 @@ body {
 .task,
 .addTask,
 .newTask,
-.newTask__container {
+.taskForm {
   --numberOfTasksPerWindow: 2;
   --taskHeight: calc(
     var(--windowVH) / var(--numberOfTasksPerWindow) -
@@ -58,7 +58,7 @@ body {
   .task,
   .addTask,
   .newTask,
-  .newTask__container {
+  .taskForm {
     --numberOfTasksPerWindow: 1;
     height: var(--taskHeight);
   }
@@ -92,7 +92,7 @@ body {
   background-color: rgba(0, 0, 0, 0.6);
 } */
 
-.newTask__container {
+.taskForm {
   width: unset;
   margin: var(--windowVH) 20px 20px 20px;
   transform: translate(0, calc(-100% - 20px));

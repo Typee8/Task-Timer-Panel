@@ -1,4 +1,4 @@
-import TaskRemoverBtn from "./TaskRemoverBtn";
+import CloseBtn from "./CloseBtn";
 import TaskRemover from "./TaskRemover";
 import StartBtn from "./StartBtn";
 import PauseBtn from "./PauseBtn";
@@ -94,14 +94,13 @@ export default function Task({ id, title, time, taskData, updateTaskPanel }) {
 
   return (
     <section className="task">
-      <TaskRemoverBtn
-        className="task__btn task__btn--taskRemover"
+      <CloseBtn
+        className="task__btn task__btn--close"
         onClick={() =>
           isTaskRemoverOpen
             ? setIsTaskRemoverOpen(false)
             : setIsTaskRemoverOpen(true)
         }
-        isDisabled={false}
       />
       <TaskRemover
         isOpen={isTaskRemoverOpen}

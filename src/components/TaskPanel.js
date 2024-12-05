@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import Task from "./Task";
 import AddBtn from "./AddBtn";
+import TaskForm from "./TaskForm";
 import FirebaseFetch from "../Providers/FirebaseFetch";
 
 export default function TaskPanel() {
   const [tasksList, setTasksList] = useState(false);
   const firebaseFetch = new FirebaseFetch();
-
-  useEffect(() => loadData, []);
-
   async function loadData() {
     const data = await firebaseFetch.fetchData();
     setTasksList(data);
   }
+
+  useEffect(() => loadData, []);
 
   if (tasksList === false) {
     return (
@@ -48,7 +48,7 @@ export default function TaskPanel() {
               className="task__btn task__btn--add"
               onClick={console.log("AddBtn clicked")}
             />
-            {/*           <div className="newTask__container"></div> */}
+            <TaskForm updateTaskPanel={loadData} />
           </section>
         </section>
         {finishedTasksJSX.length > 0 ? (
