@@ -6,6 +6,8 @@ import FirebaseFetch from "../Providers/FirebaseFetch";
 
 export default function TaskPanel() {
   const [tasksList, setTasksList] = useState(false);
+  const [isTaskFormOpen, setIsTaskFormOpen] = useState(false);
+
   const firebaseFetch = new FirebaseFetch();
   async function loadData() {
     const data = await firebaseFetch.fetchData();
@@ -46,9 +48,13 @@ export default function TaskPanel() {
           <section className="newTask">
             <AddBtn
               className="task__btn task__btn--add"
-              onClick={console.log("AddBtn clicked")}
+              onClick={() => setIsTaskFormOpen(true)}
             />
-            <TaskForm updateTaskPanel={loadData} />
+            <TaskForm
+              updateTaskPanel={loadData}
+              isOpen={isTaskFormOpen}
+              setIsOpen={setIsTaskFormOpen}
+            />
           </section>
         </section>
         {finishedTasksJSX.length > 0 ? (
