@@ -72,7 +72,7 @@ export default function Task({ id, title, time, taskData, updateTaskPanel }) {
     firebaseFetch.updateData(id, newTaskData);
   }
 
-  function handleTaskSave() {
+  async function handleTaskSave() {
     clearInterval(intervalID);
     setIsRunning(false);
     const newTaskData = {
@@ -80,21 +80,20 @@ export default function Task({ id, title, time, taskData, updateTaskPanel }) {
       isDone: true,
       time: savedTimes,
     };
-    firebaseFetch.updateData(id, newTaskData);
-    // if firebaseFetch fails i need to stop updating Task Panel.
+    await firebaseFetch.updateData(id, newTaskData);
     updateTaskPanel();
     setIsTaskRemoverOpen(false);
   }
 
-  function handleTaskRemove() {
+  async function handleTaskRemove() {
     clearInterval(intervalID);
-    firebaseFetch.removeData(id);
+    await firebaseFetch.removeData(id);
     updateTaskPanel();
     setIsTaskRemoverOpen(false);
   }
 
   return (
-    <section id={id} className="task">
+    <section className="task">
       <TaskRemoverBtn
         className="task__btn task__btn--taskRemover"
         onClick={() =>

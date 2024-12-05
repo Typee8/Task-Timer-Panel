@@ -1,6 +1,5 @@
 @media (min-width: 760px) {
-  .activeTasks,
-  .finishedTasks {
+  .taskPanel__container {
     display: grid;
     grid-template-columns: repeat(auto-fill, 350px);
     gap: 20px;
@@ -8,6 +7,7 @@
   }
 
   .task,
+  .newTask,
   .addTask {
     --numberOfTasksPerWindow: 3;
     height: var(--taskHeight);
@@ -16,12 +16,6 @@
   .finishedTasks__header {
     grid-column: 1 / -1;
     text-align: start;
-  }
-
-  .newTask {
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   .newTask__container {

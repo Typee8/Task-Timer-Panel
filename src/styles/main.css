@@ -21,8 +21,7 @@ body {
   overflow: hidden;
 }
 
-.activeTasks,
-.finishedTasks {
+.taskPanel__container {
   --tasks-gap: 20px;
   --tasks-padding: 20px;
 
@@ -35,6 +34,7 @@ body {
 
 .task,
 .addTask,
+.newTask,
 .newTask__container {
   --numberOfTasksPerWindow: 2;
   --taskHeight: calc(
@@ -57,6 +57,7 @@ body {
 @media (max-height: 400px) {
   .task,
   .addTask,
+  .newTask,
   .newTask__container {
     --numberOfTasksPerWindow: 1;
     height: var(--taskHeight);
@@ -76,12 +77,12 @@ body {
 .addTask {
   z-index: 999;
 }
-
+/* 
 .addTask--hidden {
   opacity: 0;
-}
-
-.newTask {
+} */
+/* new task from styling */
+/* .newTask {
   position: fixed;
   z-index: 1002;
   top: 0;
@@ -89,7 +90,7 @@ body {
   width: 100vw;
   height: var(--windowVH);
   background-color: rgba(0, 0, 0, 0.6);
-}
+} */
 
 .newTask__container {
   width: unset;

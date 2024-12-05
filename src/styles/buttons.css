@@ -16,7 +16,7 @@
 }
 
 .task__btn--start,
-.btn--add {
+.task__btn--add {
   width: calc(var(--btn-width-default) * 1.8);
   height: calc(var(--btn-height-default) * 1.8);
 }
@@ -26,12 +26,12 @@
   grid-column: 2/3;
 }
 
-.btn--add {
+.task__btn--add {
   align-self: center;
   margin-block: auto;
 }
 
-.btn--add-active {
+.task__btn--add-active {
   display: none;
 }
 

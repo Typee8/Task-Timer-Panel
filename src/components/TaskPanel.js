@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Task from "./Task";
+import AddBtn from "./AddBtn";
 import FirebaseFetch from "../Providers/FirebaseFetch";
 
 export default function TaskPanel() {
@@ -11,11 +12,6 @@ export default function TaskPanel() {
   async function loadData() {
     const data = await firebaseFetch.fetchData();
     setTasksList(data);
-  }
-
-  function updateTaskPanel(id, obj) {
-    const newTasksList = tasksList.map((task) => (id === task.id ? obj : task));
-    setTasksList(newTasksList);
   }
 
   if (tasksList === false) {
@@ -31,7 +27,7 @@ export default function TaskPanel() {
     tasksList.forEach((task) => {
       const component = (
         <Task
-          id={task.id}
+          key={task.id}
           title={task.title}
           time={task.time}
           taskData={task}
@@ -45,11 +41,22 @@ export default function TaskPanel() {
 
     return (
       <section className="taskPanel">
-        <section className="activeTasks">{activeTasksJSX}</section>
-        <section className="finishedTasks">
-          <h2 className="finishedTasks__header">Finished Tasks</h2>
-          {finishedTasksJSX}
+        <section className="taskPanel__container">
+          {activeTasksJSX}
+          <section className="newTask">
+            <AddBtn
+              className="task__btn task__btn--add"
+              onClick={console.log("AddBtn clicked")}
+            />
+            {/*           <div className="newTask__container"></div> */}
+          </section>
         </section>
+        {finishedTasksJSX.length > 0 ? (
+          <section className="taskPanel__container">
+            <h2 className="finishedTasks__header">Finished Tasks</h2>
+            {finishedTasksJSX}
+          </section>
+        ) : null}
       </section>
     );
   }
