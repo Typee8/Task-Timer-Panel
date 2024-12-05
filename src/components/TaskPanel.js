@@ -30,6 +30,7 @@ export default function TaskPanel() {
       const component = (
         <Task
           key={task.id}
+          id={task.id}
           title={task.title}
           time={task.time}
           taskData={task}

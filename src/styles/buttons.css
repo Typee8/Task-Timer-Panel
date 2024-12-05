@@ -38,7 +38,7 @@
 .task__btn--pause,
 .task__btn--submit,
 .task__btn--save,
-.task__btn--close {
+.task__btn--remove {
   width: calc(var(--btn-width-default) * 2.8);
   height: calc(var(--btn-height-default) * 1.6);
   border-radius: 20px;

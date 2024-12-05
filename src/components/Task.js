@@ -86,6 +86,7 @@ export default function Task({ id, title, time, taskData, updateTaskPanel }) {
   }
 
   async function handleTaskRemove() {
+    console.log(id);
     clearInterval(intervalID);
     await firebaseFetch.removeData(id);
     updateTaskPanel();

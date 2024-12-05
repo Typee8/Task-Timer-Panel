@@ -18,7 +18,7 @@ export default function TaskRemover({
             onClick={handleTaskSave}
           />
           <RemoveBtn
-            className="task__btn task__btn--close"
+            className="task__btn task__btn--remove"
             onClick={handleTaskRemove}
           />
         </div>
