@@ -6,6 +6,11 @@
   --windowVH: 100vh;
 }
 
+html,
+body {
+  min-width: 320px;
+}
+
 body {
   color: white;
   margin: 0;
