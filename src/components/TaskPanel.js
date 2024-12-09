@@ -15,6 +15,11 @@ export default function TaskPanel() {
   }
 
   useEffect(() => loadData, []);
+  useEffect(() => {
+    isTaskFormOpen
+      ? (document.body.style.overflow = "hidden")
+      : (document.body.style.overflow = "");
+  }, [isTaskFormOpen]);
 
   if (tasksList === false) {
     return (
