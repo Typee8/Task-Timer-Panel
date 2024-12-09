@@ -21,18 +21,9 @@
   height: calc(var(--btn-height-default) * 1.8);
 }
 
-.task__btn--start,
-.task__btn--pause {
-  grid-column: 2/3;
-}
-
 .task__btn--add {
   align-self: center;
   margin-block: auto;
-}
-
-.task__btn--add-active {
-  display: none;
 }
 
 .task__btn--pause,
@@ -54,27 +45,13 @@
   height: var(--btn-height-default);
 }
 
-.btn__sign--small {
-  width: calc(var(--btn-width-default) * 0.5);
-  height: calc(var(--btn-height-default) * 0.5);
-}
-
-.btn__sign--medium {
-  width: calc(var(--btn-width-default) * 0.6);
-  height: calc(var(--btn-height-default) * 0.6);
-}
-
-.task__btn--close,
-.btn--formRemove {
+.task__btn--close {
+  z-index: 1001;
   position: absolute;
   top: 15px;
   right: 15px;
   width: calc(var(--btn-width-default) * 0.8);
   height: calc(var(--btn-height-default) * 0.8);
-}
-
-.task__btn--close {
-  z-index: 1001;
 }
 
 @media (min-width: 760px) {

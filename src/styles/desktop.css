@@ -4,8 +4,7 @@
   }
 
   .task,
-  .newTask,
-  .addTask {
+  .newTask {
     --numberOfTasksPerWindow: 4;
     height: var(--taskHeight);
   }
