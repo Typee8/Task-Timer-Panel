@@ -19,10 +19,7 @@
   }
 
   .taskForm {
-    position: absolute;
-    top: 15vh;
     margin: unset;
-    transform: unset;
     width: 350px;
     height: 400px;
   }

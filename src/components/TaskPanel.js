@@ -51,11 +51,6 @@ export default function TaskPanel() {
               className="task__btn task__btn--add"
               onClick={() => setIsTaskFormOpen(true)}
             />
-            <TaskForm
-              updateTaskPanel={loadData}
-              isOpen={isTaskFormOpen}
-              setIsOpen={setIsTaskFormOpen}
-            />
           </section>
         </section>
         {finishedTasksJSX.length > 0 ? (
@@ -63,6 +58,15 @@ export default function TaskPanel() {
             <h2 className="finishedTasks__header">Finished Tasks</h2>
             {finishedTasksJSX}
           </section>
+        ) : null}
+        {isTaskFormOpen ? (
+          <div className="taskPanel__cover">
+            <TaskForm
+              updateTaskPanel={loadData}
+              isOpen={isTaskFormOpen}
+              setIsOpen={setIsTaskFormOpen}
+            />
+          </div>
         ) : null}
       </section>
     );
