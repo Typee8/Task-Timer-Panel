@@ -1,4 +1,4 @@
-import plusIcon from "../images/plus_icon.svg";
+import plusIcon from "../../images/plus_icon.svg";
 
 export default function AddBtn({ className, onClick }) {
   return (

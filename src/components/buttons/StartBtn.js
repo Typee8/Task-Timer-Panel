@@ -1,4 +1,4 @@
-import greaterThanIcon from "../images/greaterThan_icon.svg";
+import greaterThanIcon from "../../images/greaterThan_icon.svg";
 
 export default function StartBtn({ className, onClick }) {
   return (

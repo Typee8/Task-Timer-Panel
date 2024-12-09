@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CloseBtn from "./CloseBtn";
+import CloseBtn from "./buttons/CloseBtn";
 import FirebaseFetch from "../Providers/FirebaseFetch";
 
 export default function TaskForm({ updateTaskPanel, isOpen, setIsOpen }) {

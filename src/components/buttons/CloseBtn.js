@@ -1,4 +1,4 @@
-import crossIcon from "../images/cross_icon.svg";
+import crossIcon from "../../images/cross_icon.svg";
 
 export default function CloseBtn({ className, onClick }) {
   return (

@@ -1,4 +1,4 @@
-import binIcon from "../images/bin_icon.svg";
+import binIcon from "../../images/bin_icon.svg";
 
 export default function RemoveBtn({ className, onClick, isDisabled = false }) {
   return (

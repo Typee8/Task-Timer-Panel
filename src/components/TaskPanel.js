@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Task from "./Task";
-import AddBtn from "./AddBtn";
+import AddBtn from "./buttons/AddBtn";
 import TaskForm from "./TaskForm";
 import FirebaseFetch from "../Providers/FirebaseFetch";
 
@@ -48,21 +48,21 @@ export default function TaskPanel() {
     });
 
     return (
-      <section className="taskPanel">
-        <section className="taskPanel__container">
+      <main className="taskPanel">
+        <div className="taskPanel__container">
           {activeTasksJSX}
-          <section className="newTask">
+          <div className="newTask">
             <AddBtn
               className="task__btn task__btn--add"
               onClick={() => setIsTaskFormOpen(true)}
             />
-          </section>
-        </section>
+          </div>
+        </div>
         {finishedTasksJSX.length > 0 ? (
-          <section className="taskPanel__container">
+          <div className="taskPanel__container">
             <h2 className="finishedTasks__header">Finished Tasks</h2>
             {finishedTasksJSX}
-          </section>
+          </div>
         ) : null}
         {isTaskFormOpen ? (
           <div className="taskPanel__cover">
@@ -73,7 +73,7 @@ export default function TaskPanel() {
             />
           </div>
         ) : null}
-      </section>
+      </main>
     );
   }
 }

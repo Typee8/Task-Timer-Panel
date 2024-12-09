@@ -1,4 +1,4 @@
-import equalsIcon from "../images/equals_icon.svg";
+import equalsIcon from "../../images/equals_icon.svg";
 
 export default function PauseBtn({ className, onClick }) {
   return (

@@ -1,4 +1,4 @@
-import bookmarkIcon from "../images/bookmark_icon.svg";
+import bookmarkIcon from "../../images/bookmark_icon.svg";
 
 export default function SaveBtn({ className, onClick }) {
   return (

@@ -1,7 +1,7 @@
-import CloseBtn from "./CloseBtn";
+import CloseBtn from "./buttons/CloseBtn";
 import TaskRemover from "./TaskRemover";
-import StartBtn from "./StartBtn";
-import PauseBtn from "./PauseBtn";
+import StartBtn from "./buttons/StartBtn";
+import PauseBtn from "./buttons/PauseBtn";
 import FirebaseFetch from "../Providers/FirebaseFetch";
 import { useState } from "react";
 
