@@ -8,7 +8,6 @@ body {
 .taskPanel {
   position: relative;
   min-height: 100vh;
-  transition: opacity 0.5s ease;
 }
 
 .taskPanel__container {
@@ -69,8 +68,7 @@ body {
   padding: 20px;
   border-radius: 20px;
   background-color: rgb(80, 80, 80);
-  opacity: 1;
-  transition: opacity 0.2s ease;
+  transition: 0.2s ease;
 }
 
 .task__title,

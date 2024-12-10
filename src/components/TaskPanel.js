@@ -21,13 +21,7 @@ export default function TaskPanel() {
       : (document.body.style.overflow = "");
   }, [isTaskFormOpen]);
 
-  if (tasksList === false) {
-    return (
-      <section className="taskPanel">
-        <h2>LOADING</h2>
-      </section>
-    );
-  } else {
+  if (tasksList !== false) {
     const activeTasksJSX = [];
     const finishedTasksJSX = [];
 
