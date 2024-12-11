@@ -107,6 +107,7 @@ export default function Task({ id, title, time, taskData, updateTaskPanel }) {
         isOpen={isTaskRemoverOpen}
         handleTaskSave={handleTaskSave}
         handleTaskRemove={handleTaskRemove}
+        type={taskData.isDone ? "remove" : null}
       />
       <header className="task__header">
         <div className="task__title">{title}</div>
@@ -129,17 +130,6 @@ export default function Task({ id, title, time, taskData, updateTaskPanel }) {
           }
           onClick={handleTaskStart}
         />
-        {/*         {isRunning ? (
-          <PauseBtn
-            className="task__btn task__btn--pause"
-            onClick={handleTaskPause}
-          />
-        ) : (
-          <StartBtn
-            className="task__btn task__btn--start"
-            onClick={handleTaskStart}
-          />
-        )} */}
       </footer>
     </section>
   );
