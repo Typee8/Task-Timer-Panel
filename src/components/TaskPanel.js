@@ -58,15 +58,19 @@ export default function TaskPanel() {
             {finishedTasksJSX}
           </div>
         ) : null}
-        {isTaskFormOpen ? (
-          <div className="taskPanel__cover">
-            <TaskForm
-              updateTaskPanel={loadData}
-              isOpen={isTaskFormOpen}
-              setIsOpen={setIsTaskFormOpen}
-            />
-          </div>
-        ) : null}
+        <div
+          className={
+            isTaskFormOpen
+              ? "taskPanel__cover"
+              : "taskPanel__cover taskPanel__cover--hidden"
+          }
+        >
+          <TaskForm
+            updateTaskPanel={loadData}
+            isOpen={isTaskFormOpen}
+            setIsOpen={setIsTaskFormOpen}
+          />
+        </div>
       </main>
     );
   }

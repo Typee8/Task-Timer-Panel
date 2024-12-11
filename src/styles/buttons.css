@@ -12,7 +12,8 @@
   border: none;
   border-radius: 50%;
   background-color: whitesmoke;
-  transition: all 0.2s ease;
+  transition: opacity 0.4s ease;
+  transition: width 0.3s ease;
 }
 
 .task__btn--start,
@@ -66,4 +67,11 @@
     --btn-width-default: 35px;
     --btn-height-default: 35px;
   }
+}
+
+.task__btn--hidden {
+  position: absolute;
+  width: 0;
+  opacity: 0;
+  pointer-events: none;
 }

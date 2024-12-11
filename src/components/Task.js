@@ -113,7 +113,23 @@ export default function Task({ id, title, time, taskData, updateTaskPanel }) {
         <div className="task__timer">{showTime(savedTimes)}</div>
       </header>
       <footer className="task__footer">
-        {isRunning ? (
+        <PauseBtn
+          className={
+            isRunning
+              ? "task__btn task__btn--pause"
+              : "task__btn task__btn--pause task__btn--hidden"
+          }
+          onClick={handleTaskPause}
+        />
+        <StartBtn
+          className={
+            isRunning
+              ? "task__btn task__btn--start task__btn--hidden"
+              : "task__btn task__btn--start"
+          }
+          onClick={handleTaskStart}
+        />
+        {/*         {isRunning ? (
           <PauseBtn
             className="task__btn task__btn--pause"
             onClick={handleTaskPause}
@@ -123,7 +139,7 @@ export default function Task({ id, title, time, taskData, updateTaskPanel }) {
             className="task__btn task__btn--start"
             onClick={handleTaskStart}
           />
-        )}
+        )} */}
       </footer>
     </section>
   );

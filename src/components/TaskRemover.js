@@ -6,27 +6,29 @@ export default function TaskRemover({
   handleTaskSave,
   handleTaskRemove,
 }) {
-  if (isOpen) {
-    return (
-      <div className="task__remover">
-        <h2 className="remover__title">
-          What would you like to do with this task?
-        </h2>
-        <ul className="remover__container">
-          <li className="container__item">
-            <SaveBtn
-              className="task__btn task__btn--save"
-              onClick={handleTaskSave}
-            />
-          </li>
-          <li className="container__item">
-            <RemoveBtn
-              className="task__btn task__btn--remove"
-              onClick={handleTaskRemove}
-            />
-          </li>
-        </ul>
-      </div>
-    );
-  }
+  return (
+    <div
+      className={
+        isOpen ? "task__remover" : "task__remover task__remover--hidden"
+      }
+    >
+      <h2 className="remover__title">
+        What would you like to do with this task?
+      </h2>
+      <ul className="remover__container">
+        <li className="container__item">
+          <SaveBtn
+            className="task__btn task__btn--save"
+            onClick={handleTaskSave}
+          />
+        </li>
+        <li className="container__item">
+          <RemoveBtn
+            className="task__btn task__btn--remove"
+            onClick={handleTaskRemove}
+          />
+        </li>
+      </ul>
+    </div>
+  );
 }
