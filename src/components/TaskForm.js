@@ -1,10 +1,10 @@
 import { useState } from "react";
 import CloseBtn from "./buttons/CloseBtn";
-import FirebaseFetch from "../Providers/FirebaseFetch";
+import FirebaseFetch from "../providers/FirebaseFetch";
 
 export default function TaskForm({ updateTaskPanel, isOpen, setIsOpen }) {
   const defaultValue = "New Task";
-  const [state, setState] = useState(defaultValue);
+  const [formValue, setFormValue] = useState(defaultValue);
 
   async function handleNewTaskSubmit() {
     const firebaseFetch = new FirebaseFetch();
@@ -14,7 +14,7 @@ export default function TaskForm({ updateTaskPanel, isOpen, setIsOpen }) {
         current: 0,
         total: 0,
       },
-      title: state,
+      title: formValue,
     };
 
     await firebaseFetch.pushData(taskTemplate);
@@ -30,10 +30,12 @@ export default function TaskForm({ updateTaskPanel, isOpen, setIsOpen }) {
         />
         <textarea
           className="taskForm__input"
-          value={state}
-          onFocus={() => (state === defaultValue ? setState("") : null)}
-          onBlur={() => (state.length === 0 ? setState(defaultValue) : null)}
-          onChange={(evt) => setState(evt.currentTarget.value)}
+          value={formValue}
+          onFocus={() => (formValue === defaultValue ? setFormValue("") : null)}
+          onBlur={() =>
+            formValue.length === 0 ? setFormValue(defaultValue) : null
+          }
+          onChange={(evt) => setFormValue(evt.currentTarget.value)}
           maxLength="35"
         />
         <input

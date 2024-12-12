@@ -1,7 +1,8 @@
 {
-  "name": "task-timer-panel-modern",
-  "version": "0.1.0",
-  "private": true,
+  "name": "task-timer-panel",
+  "version": "2.0 (alpha)",
+  "private": false,
+  "homepage": "https://typee8.github.io/task-timer-panel-test",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -10,8 +11,6 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
-    "react-spring": "^9.7.4",
-    "styled-components": "^6.1.13",
     "uuid": "^11.0.3",
     "web-vitals": "^2.1.4"
   },
@@ -38,5 +37,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }

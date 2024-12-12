@@ -1,4 +1,4 @@
-import styles from "./styles/styles";
+import "./styles/styles";
 
 import TaskPanel from "./components/TaskPanel";
 function App() {

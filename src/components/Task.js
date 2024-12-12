@@ -2,14 +2,14 @@ import CloseBtn from "./buttons/CloseBtn";
 import TaskRemover from "./TaskRemover";
 import StartBtn from "./buttons/StartBtn";
 import PauseBtn from "./buttons/PauseBtn";
-import FirebaseFetch from "../Providers/FirebaseFetch";
+import FirebaseFetch from "../providers/FirebaseFetch";
 import { useState } from "react";
 
 export default function Task({ id, title, time, taskData, updateTaskPanel }) {
-  const [isTaskRemoverOpen, setIsTaskRemoverOpen] = useState(false);
-  const [intervalID, setIntervalId] = useState();
   const [savedTimes, setSavedTimes] = useState(time);
   const [isRunning, setIsRunning] = useState(false);
+  const [countIntervalID, setCountIntervalId] = useState();
+  const [isTaskRemoverOpen, setIsTaskRemoverOpen] = useState(false);
 
   const firebaseFetch = new FirebaseFetch();
 
@@ -56,13 +56,13 @@ export default function Task({ id, title, time, taskData, updateTaskPanel }) {
         current: current + parseInt((Date.now() - startTime) / 1000),
       });
     }, 1000);
-    clearInterval(intervalID);
-    setIntervalId(newIntervalID);
+    clearInterval(countIntervalID);
+    setCountIntervalId(newIntervalID);
     setIsRunning(true);
   }
 
   function handleTaskPause() {
-    clearInterval(intervalID);
+    clearInterval(countIntervalID);
     setIsRunning(false);
     const newTaskData = {
       ...taskData,
@@ -73,7 +73,7 @@ export default function Task({ id, title, time, taskData, updateTaskPanel }) {
   }
 
   async function handleTaskSave() {
-    clearInterval(intervalID);
+    clearInterval(countIntervalID);
     setIsRunning(false);
     const newTaskData = {
       ...taskData,
@@ -87,7 +87,7 @@ export default function Task({ id, title, time, taskData, updateTaskPanel }) {
 
   async function handleTaskRemove() {
     console.log(id);
-    clearInterval(intervalID);
+    clearInterval(countIntervalID);
     await firebaseFetch.removeData(id);
     updateTaskPanel();
     setIsTaskRemoverOpen(false);

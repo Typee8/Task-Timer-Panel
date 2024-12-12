@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Task from "./Task";
 import AddBtn from "./buttons/AddBtn";
 import TaskForm from "./TaskForm";
-import FirebaseFetch from "../Providers/FirebaseFetch";
+import FirebaseFetch from "../providers/FirebaseFetch";
 
 export default function TaskPanel() {
   const [tasksList, setTasksList] = useState(false);
