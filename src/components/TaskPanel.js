@@ -14,7 +14,7 @@ export default function TaskPanel() {
     setTasksList(data);
   }
 
-  useEffect(() => loadData, []);
+  useEffect(() => loadData(), []);
   useEffect(() => {
     isTaskFormOpen
       ? (document.body.style.overflow = "hidden")
