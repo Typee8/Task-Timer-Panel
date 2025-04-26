@@ -1,6 +1,7 @@
 import { useState } from "react";
 import CloseBtn from "./buttons/CloseBtn";
 import FirebaseFetch from "../providers/FirebaseFetch";
+import { v4 as uuidv4 } from "uuid";
 
 export default function TaskForm({ tasksList, addTask, isOpen, setIsOpen }) {
   const defaultValue = "New Task";
@@ -15,6 +16,7 @@ export default function TaskForm({ tasksList, addTask, isOpen, setIsOpen }) {
         current: 0,
         total: 0,
       },
+      id: uuidv4(),
       title: formValue,
     };
 
