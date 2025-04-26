@@ -13,11 +13,6 @@ export default function Task({ id, title, taskData, tasksList, setTasksList }) {
 
   const firebaseFetch = new FirebaseFetch();
 
-  useEffect(() => {
-    console.log(taskData.id);
-    console.log(savedTimes);
-  }, [savedTimes]);
-
   function showTime(time) {
     const { seconds, minutes, hours } = convertTimeFromSeconds(time.current);
 
