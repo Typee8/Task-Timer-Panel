@@ -14,7 +14,9 @@ export default function TaskPanel() {
     setTasksList(data);
   }
 
-  useEffect(loadData, []);
+  useEffect(() => {
+    loadData();
+  }, []);
 
   if (tasksList !== false) {
     const activeTasksJSX = [];
@@ -26,7 +28,6 @@ export default function TaskPanel() {
           key={task.id}
           id={task.id}
           title={task.title}
-          time={task.time}
           taskData={task}
           tasksList={tasksList}
           setTasksList={setTasksList}

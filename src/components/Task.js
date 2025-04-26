@@ -5,19 +5,12 @@ import PauseBtn from "./buttons/PauseBtn";
 import FirebaseFetch from "../providers/FirebaseFetch";
 import { useState } from "react";
 
-export default function Task({
-  id,
-  title,
-  time,
-  taskData,
-  tasksList,
-  setTasksList,
-}) {
-  console.log(taskData);
-  const [savedTimes, setSavedTimes] = useState(time);
+export default function Task({ id, title, taskData, tasksList, setTasksList }) {
+  const [savedTimes, setSavedTimes] = useState(taskData.time);
   const [isRunning, setIsRunning] = useState(false);
   const [countIntervalID, setCountIntervalId] = useState();
   const [isTaskRemoverOpen, setIsTaskRemoverOpen] = useState(false);
+  const [taskHidden, setTaskHidden] = useState(false);
 
   const firebaseFetch = new FirebaseFetch();
 
@@ -100,56 +93,57 @@ export default function Task({
 
   async function handleTaskRemove() {
     clearInterval(countIntervalID);
-    await firebaseFetch.removeData(id);
-
-    const newTaskList = JSON.parse(JSON.stringify([...tasksList]));
-    const taskIndex = newTaskList.findIndex((ele) => ele.id === taskData.id);
-    newTaskList.splice(taskIndex, 1);
-    setTasksList(newTaskList);
+    try {
+      setTaskHidden(true);
+      await firebaseFetch.removeData(id);
+    } catch {
+      setTaskHidden(false);
+    }
 
     setIsTaskRemoverOpen(false);
   }
 
-  return (
-    <section className="task">
-      <CloseBtn
-        className="task__btn task__btn--close"
-        onClick={() =>
-          isTaskRemoverOpen
-            ? setIsTaskRemoverOpen(false)
-            : setIsTaskRemoverOpen(true)
-        }
-      />
-      <TaskRemover
-        isOpen={isTaskRemoverOpen}
-        handleTaskSave={handleTaskSave}
-        handleTaskRemove={handleTaskRemove}
-        type={taskData.isDone ? "remove" : null}
-      />
-      <header className="task__header">
-        <div className="task__title">{title}</div>
-        <div className="task__timer">{showTime(savedTimes)}</div>
-      </header>
-      {taskData.isDone ? null : (
-        <footer className="task__footer">
-          <PauseBtn
-            className={
-              isRunning
-                ? "task__btn task__btn--pause"
-                : "task__btn task__btn--pause task__btn--hidden"
-            }
-            onClick={handleTaskPause}
-          />
-          <StartBtn
-            className={
-              isRunning
-                ? "task__btn task__btn--start task__btn--hidden"
-                : "task__btn task__btn--start"
-            }
-            onClick={handleTaskStart}
-          />
-        </footer>
-      )}
-    </section>
-  );
+  if (!taskHidden)
+    return (
+      <section className="task">
+        <CloseBtn
+          className="task__btn task__btn--close"
+          onClick={() =>
+            isTaskRemoverOpen
+              ? setIsTaskRemoverOpen(false)
+              : setIsTaskRemoverOpen(true)
+          }
+        />
+        <TaskRemover
+          isOpen={isTaskRemoverOpen}
+          handleTaskSave={handleTaskSave}
+          handleTaskRemove={handleTaskRemove}
+          type={taskData.isDone ? "remove" : null}
+        />
+        <header className="task__header">
+          <div className="task__title">{title}</div>
+          <div className="task__timer">{showTime(savedTimes)}</div>
+        </header>
+        {taskData.isDone ? null : (
+          <footer className="task__footer">
+            <PauseBtn
+              className={
+                isRunning
+                  ? "task__btn task__btn--pause"
+                  : "task__btn task__btn--pause task__btn--hidden"
+              }
+              onClick={handleTaskPause}
+            />
+            <StartBtn
+              className={
+                isRunning
+                  ? "task__btn task__btn--start task__btn--hidden"
+                  : "task__btn task__btn--start"
+              }
+              onClick={handleTaskStart}
+            />
+          </footer>
+        )}
+      </section>
+    );
 }
