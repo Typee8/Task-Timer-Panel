@@ -6,7 +6,7 @@ It enables you to track the time spent on various activities and run multiple ti
 
 It's the conclusion of 12th chapter of [devmentor.pl](https://devmentor.pl/mentoring-javascript) mentoring program.
 
-### 🚀 **Check it here** 👉 https://task-timer-panel.web.app/
+### 🚀 **Check it here** 👉 https://task-timer-panel.firebaseapp.com/
 
 ---
 
