@@ -14,12 +14,7 @@ export default function TaskPanel() {
     setTasksList(data);
   }
 
-  useEffect(() => loadData(), []);
-  useEffect(() => {
-    isTaskFormOpen
-      ? (document.body.style.overflow = "hidden")
-      : (document.body.style.overflow = "");
-  }, [isTaskFormOpen]);
+  useEffect(loadData, []);
 
   if (tasksList !== false) {
     const activeTasksJSX = [];
@@ -33,7 +28,8 @@ export default function TaskPanel() {
           title={task.title}
           time={task.time}
           taskData={task}
-          updateTaskPanel={loadData}
+          tasksList={tasksList}
+          setTasksList={setTasksList}
         />
       );
 
@@ -66,7 +62,8 @@ export default function TaskPanel() {
           }
         >
           <TaskForm
-            updateTaskPanel={loadData}
+            tasksList={tasksList}
+            addTask={setTasksList}
             isOpen={isTaskFormOpen}
             setIsOpen={setIsTaskFormOpen}
           />

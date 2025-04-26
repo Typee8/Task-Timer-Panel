@@ -2,11 +2,12 @@ import { useState } from "react";
 import CloseBtn from "./buttons/CloseBtn";
 import FirebaseFetch from "../providers/FirebaseFetch";
 
-export default function TaskForm({ updateTaskPanel, isOpen, setIsOpen }) {
+export default function TaskForm({ tasksList, addTask, isOpen, setIsOpen }) {
   const defaultValue = "New Task";
   const [formValue, setFormValue] = useState(defaultValue);
 
-  async function handleNewTaskSubmit() {
+  async function handleNewTaskSubmit(evt) {
+    evt.preventDefault();
     const firebaseFetch = new FirebaseFetch();
     const taskTemplate = {
       isDone: false,
@@ -17,8 +18,15 @@ export default function TaskForm({ updateTaskPanel, isOpen, setIsOpen }) {
       title: formValue,
     };
 
-    await firebaseFetch.pushData(taskTemplate);
-    updateTaskPanel();
+    try {
+      await firebaseFetch.pushData(taskTemplate);
+      addTask([...tasksList, taskTemplate]);
+      setIsOpen(false);
+      setFormValue(defaultValue);
+    } catch (error) {
+      console.error("Data push failed!", error);
+      throw new Error("Data push failed!");
+    }
   }
 
   if (isOpen) {

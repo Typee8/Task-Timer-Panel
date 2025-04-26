@@ -5,7 +5,15 @@ import PauseBtn from "./buttons/PauseBtn";
 import FirebaseFetch from "../providers/FirebaseFetch";
 import { useState } from "react";
 
-export default function Task({ id, title, time, taskData, updateTaskPanel }) {
+export default function Task({
+  id,
+  title,
+  time,
+  taskData,
+  tasksList,
+  setTasksList,
+}) {
+  console.log(taskData);
   const [savedTimes, setSavedTimes] = useState(time);
   const [isRunning, setIsRunning] = useState(false);
   const [countIntervalID, setCountIntervalId] = useState();
@@ -81,14 +89,24 @@ export default function Task({ id, title, time, taskData, updateTaskPanel }) {
       time: savedTimes,
     };
     await firebaseFetch.updateData(id, newTaskData);
-    updateTaskPanel();
+
+    const newTaskList = JSON.parse(JSON.stringify([...tasksList]));
+    const taskIndex = newTaskList.findIndex((ele) => ele.id === taskData.id);
+    newTaskList.splice(taskIndex, 1, newTaskData);
+    setTasksList(newTaskList);
+
     setIsTaskRemoverOpen(false);
   }
 
   async function handleTaskRemove() {
     clearInterval(countIntervalID);
     await firebaseFetch.removeData(id);
-    updateTaskPanel();
+
+    const newTaskList = JSON.parse(JSON.stringify([...tasksList]));
+    const taskIndex = newTaskList.findIndex((ele) => ele.id === taskData.id);
+    newTaskList.splice(taskIndex, 1);
+    setTasksList(newTaskList);
+
     setIsTaskRemoverOpen(false);
   }
 
@@ -112,24 +130,26 @@ export default function Task({ id, title, time, taskData, updateTaskPanel }) {
         <div className="task__title">{title}</div>
         <div className="task__timer">{showTime(savedTimes)}</div>
       </header>
-      <footer className="task__footer">
-        <PauseBtn
-          className={
-            isRunning
-              ? "task__btn task__btn--pause"
-              : "task__btn task__btn--pause task__btn--hidden"
-          }
-          onClick={handleTaskPause}
-        />
-        <StartBtn
-          className={
-            isRunning
-              ? "task__btn task__btn--start task__btn--hidden"
-              : "task__btn task__btn--start"
-          }
-          onClick={handleTaskStart}
-        />
-      </footer>
+      {taskData.isDone ? null : (
+        <footer className="task__footer">
+          <PauseBtn
+            className={
+              isRunning
+                ? "task__btn task__btn--pause"
+                : "task__btn task__btn--pause task__btn--hidden"
+            }
+            onClick={handleTaskPause}
+          />
+          <StartBtn
+            className={
+              isRunning
+                ? "task__btn task__btn--start task__btn--hidden"
+                : "task__btn task__btn--start"
+            }
+            onClick={handleTaskStart}
+          />
+        </footer>
+      )}
     </section>
   );
 }
